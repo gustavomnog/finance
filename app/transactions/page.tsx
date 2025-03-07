@@ -2,23 +2,31 @@ import { db } from "../_lib/prisma";
 import { DataTable } from "../_components/ui/data-table";
 import { TransactionsColumns } from "./_columns";
 import AddTransactionsButton from "../_components/add-transations-button";
+import Navbar from "../_components/navbar";
 
 async function TransactionsPage() {
-  const transactions = await db.transaction.findMany({});
+  const transactions = await db.transaction.findMany({
+    orderBy: {
+      date: "desc",
+    },
+  });
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex w-full items-center justify-between">
-        <h1 className="text-2xl font-bold">Transações</h1>
+    <>
+      <Navbar />
+      <div className="space-y-6 p-6">
+        <div className="flex w-full items-center justify-between">
+          <h1 className="text-2xl font-bold">Transações</h1>
 
-        <AddTransactionsButton />
+          <AddTransactionsButton />
+        </div>
+
+        <DataTable
+          columns={TransactionsColumns}
+          data={JSON.parse(JSON.stringify(transactions))}
+        />
       </div>
-
-      <DataTable
-        columns={TransactionsColumns}
-        data={JSON.parse(JSON.stringify(transactions))}
-      />
-    </div>
+    </>
   );
 }
 export default TransactionsPage;

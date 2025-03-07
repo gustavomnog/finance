@@ -93,8 +93,11 @@ const UpsertTransactionDialog = ({
   });
 
   useEffect(() => {
-    if (transactionId) {
-      form.reset(defaultValues);
+    if (transactionId && defaultValues) {
+      form.reset({
+        ...defaultValues,
+        date: new Date(defaultValues.date!),
+      });
     }
   }, [transactionId, defaultValues, form]);
 
