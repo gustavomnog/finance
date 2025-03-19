@@ -43,8 +43,6 @@ const TimeSelect = () => {
     push(`?month=${month}&year=${year}`);
   };
 
-  console.log(YEAR_OPTIONS);
-
   return (
     <div className="flex gap-4">
       <Select onValueChange={handleMonthChange} defaultValue={month || ""}>
