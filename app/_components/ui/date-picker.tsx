@@ -45,6 +45,14 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
           onSelect={onChange}
           initialFocus
           locale={ptBR}
+          disabled={{
+            before: new Date(
+              new Date().setFullYear(new Date().getFullYear() - 5),
+            ),
+            after: new Date(
+              new Date().setFullYear(new Date().getFullYear() + 5),
+            ),
+          }}
         />
       </PopoverContent>
     </Popover>
